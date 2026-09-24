@@ -45,8 +45,7 @@ DA NC/
 ├── app.py                  # Mã nguồn ứng dụng Web Streamlit VIP Real-Time 4D/3D chính
 ├── requirements.txt        # Danh sách thư viện Python (streamlit, plotly, scikit-learn, v.v.)
 ├── README.md               # Báo cáo học thuật & Hướng dẫn triển khai chi tiết
-├── Bao_Cao_Do_An_PTDLNC.docx # Báo cáo nộp bài Word chuyên nghiệp
-└── Slides/                 # Slide bài giảng Chương 3: Trực quan hóa Dữ liệu
+
 ```
 
 ---
