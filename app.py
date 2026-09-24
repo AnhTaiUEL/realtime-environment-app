@@ -11,7 +11,7 @@ from sklearn.linear_model import LinearRegression
 from sklearn.metrics import r2_score, mean_squared_error
 
 # =============================================================================
-# 1. CẤU HÌNH TRANG VÀ DESIGN SYSTEM ULTRA VIP (CYBER-GLOW & GLASSMORPHISM)
+# 1. CẤU HÌNH TRANG VÀ DESIGN SYSTEM HIGH-CONTRAST ULTRA VIP
 # =============================================================================
 st.set_page_config(
     page_title="👑 VIP System: Giám Sát & Dự Báo Môi Trường 4D & AI",
@@ -20,32 +20,38 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Custom CSS cho giao diện Ultra VIP Dark Glassmorphism Aesthetic
+# Custom CSS cho giao diện Siêu Tương Phản (High-Contrast High-Tech Theme)
 st.markdown("""
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap');
     
     html, body, [class*="css"] {
         font-family: 'Plus Jakarta Sans', sans-serif;
+        color: #FFFFFF !important;
     }
     
     .stApp {
-        background: linear-gradient(135deg, #0B0F19 0%, #111827 50%, #0F172A 100%);
-        color: #F8FAFC;
+        background: linear-gradient(135deg, #070A12 0%, #0F172A 50%, #1E293B 100%);
+        color: #FFFFFF !important;
+    }
+    
+    /* Ép tất cả các nhãn chữ Markdown, Subheader, Label thành màu trắng rõ nét */
+    .stMarkdown, p, span, label, div {
+        color: #F8FAFC !important;
     }
     
     /* Header VIP */
     .vip-header {
-        background: rgba(15, 23, 42, 0.75);
+        background: rgba(15, 23, 42, 0.85);
         backdrop-filter: blur(16px);
         -webkit-backdrop-filter: blur(16px);
         border-radius: 20px;
         padding: 28px;
         color: white;
         text-align: center;
-        box-shadow: 0 20px 40px -15px rgba(0, 242, 254, 0.15), 0 0 20px rgba(139, 92, 246, 0.1);
+        box-shadow: 0 20px 40px -15px rgba(0, 242, 254, 0.2);
         margin-bottom: 25px;
-        border: 1px solid rgba(255, 255, 255, 0.12);
+        border: 1px solid rgba(255, 255, 255, 0.2);
         position: relative;
         overflow: hidden;
     }
@@ -53,14 +59,14 @@ st.markdown("""
     .vip-header::before {
         content: '';
         position: absolute;
-        top: 0; left: 0; right: 0; height: 3px;
+        top: 0; left: 0; right: 0; height: 4px;
         background: linear-gradient(90deg, #00F2FE, #4FACFE, #00E676, #FF007F, #8B5CF6);
     }
     
     .vip-title {
         font-size: 32px;
         font-weight: 800;
-        background: linear-gradient(90deg, #38BDF8, #818CF8, #C084FC, #F472B6);
+        background: linear-gradient(90deg, #38BDF8, #818CF8, #E0E7FF, #F472B6);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         margin-bottom: 10px;
@@ -69,105 +75,109 @@ st.markdown("""
     
     .vip-badge {
         background: linear-gradient(135deg, #00F2FE 0%, #4FACFE 100%);
-        color: #0F172A;
+        color: #0F172A !important;
         font-weight: 800;
         padding: 6px 16px;
         border-radius: 20px;
         font-size: 13px;
         letter-spacing: 1.5px;
         display: inline-block;
-        box-shadow: 0 4px 15px rgba(0, 242, 254, 0.4);
+        box-shadow: 0 4px 15px rgba(0, 242, 254, 0.5);
         margin-bottom: 10px;
     }
     
     /* Live Pulse Dot */
     .pulse-dot {
         display: inline-block;
-        width: 10px;
-        height: 10px;
+        width: 12px;
+        height: 12px;
         border-radius: 50%;
         background: #10B981;
-        box-shadow: 0 0 0 rgba(16, 185, 129, 0.7);
+        box-shadow: 0 0 0 rgba(16, 185, 129, 0.8);
         animation: pulse 1.6s infinite;
         margin-right: 8px;
     }
     
     @keyframes pulse {
-        0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
-        70% { box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
+        0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.8); }
+        70% { box-shadow: 0 0 0 12px rgba(16, 185, 129, 0); }
         100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
     }
     
     /* Metric Cards VIP */
     .vip-metric-card {
-        background: rgba(30, 41, 59, 0.7);
+        background: rgba(30, 41, 59, 0.85);
         backdrop-filter: blur(12px);
-        border: 1px solid rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.18);
         border-radius: 16px;
         padding: 18px 20px;
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
         transition: all 0.3s ease;
     }
     
     .vip-metric-card:hover {
         transform: translateY(-3px);
-        border-color: rgba(56, 189, 248, 0.4);
-        box-shadow: 0 12px 25px rgba(56, 189, 248, 0.15);
+        border-color: #38BDF8;
+        box-shadow: 0 12px 25px rgba(56, 189, 248, 0.3);
     }
     
     .metric-val {
-        font-size: 26px;
+        font-size: 28px;
         font-weight: 800;
-        color: #F8FAFC;
+        color: #FFFFFF !important;
     }
     
     .metric-lbl {
-        font-size: 13px;
-        color: #94A3B8;
-        font-weight: 600;
+        font-size: 14px;
+        color: #CBD5E1 !important;
+        font-weight: 700;
     }
     
     .metric-sub {
-        font-size: 12px;
-        color: #38BDF8;
+        font-size: 13px;
+        color: #38BDF8 !important;
         font-weight: 700;
         margin-top: 4px;
     }
     
-    /* Alert Box */
+    /* Alert Box Sáng Rõ High Contrast */
     .alert-box-vip {
-        background: rgba(239, 68, 68, 0.15);
-        border-left: 5px solid #EF4444;
+        background: rgba(239, 68, 68, 0.3);
+        border-left: 6px solid #FF3B30;
         border-radius: 12px;
         padding: 16px 20px;
-        color: #FCA5A5;
-        font-weight: 600;
+        color: #FFFFFF !important;
+        font-size: 15px;
+        font-weight: 700;
         margin-bottom: 20px;
         backdrop-filter: blur(8px);
-        box-shadow: 0 4px 15px rgba(239, 68, 68, 0.2);
+        box-shadow: 0 4px 20px rgba(239, 68, 68, 0.4);
     }
     
-    /* Tab Styling */
+    /* Tabs High-Contrast VIP - CHỮ SÁNG RÕ */
     .stTabs [data-baseweb="tab-list"] {
         gap: 8px;
-        background-color: rgba(15, 23, 42, 0.8);
+        background-color: rgba(15, 23, 42, 0.95);
         padding: 8px;
         border-radius: 14px;
-        border: 1px solid rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.18);
     }
     
     .stTabs [data-baseweb="tab"] {
         border-radius: 10px;
-        color: #94A3B8;
-        font-weight: 600;
+        color: #F1F5F9 !important; /* Chữ trắng sáng cho Tab chưa chọn */
+        font-weight: 700 !important;
         padding: 10px 18px;
+        background-color: rgba(30, 41, 59, 0.7);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        font-size: 14px;
     }
     
     .stTabs [aria-selected="true"] {
-        background: linear-gradient(135deg, #38BDF8 0%, #6366F1 100%) !important;
-        color: #FFFFFF !important;
+        background: linear-gradient(135deg, #00F2FE 0%, #3B82F6 100%) !important;
+        color: #0F172A !important; /* Chữ đậm tương phản cao khi Tab được chọn */
         font-weight: 800 !important;
-        box-shadow: 0 4px 12px rgba(56, 189, 248, 0.3);
+        box-shadow: 0 4px 15px rgba(0, 242, 254, 0.5);
     }
 </style>
 """, unsafe_allow_html=True)
@@ -179,7 +189,7 @@ st.markdown("""
 <div class="vip-header">
     <span class="vip-badge">👑 VIP SCIENTIFIC EDITION</span>
     <div class="vip-title">🌍 HỆ THỐNG GIÁM SÁT & DỰ BÁO MÔ I TRƯỜNG REAL-TIME 4D / 3D</div>
-    <div style="font-size: 15px; color: #CBD5E1; margin-top: 5px;">
+    <div style="font-size: 15px; color: #F8FAFC; margin-top: 5px; font-weight: 600;">
         <span class="pulse-dot"></span> Luồng Dữ Liệu Thời Gian Thực • 4D Motion & 3D Risk Field • 7 Custom Buttons • World Emission Map • Supervised Machine Learning AI
     </div>
 </div>
@@ -301,11 +311,11 @@ with main_place.container():
             """, unsafe_allow_html=True)
             
         with m2:
-            delta_color = "#EF4444" if diff_co2 > 0 else "#10B981"
+            delta_color = "#FF4D4D" if diff_co2 > 0 else "#10B981"
             st.markdown(f"""
             <div class="vip-metric-card">
                 <div class="metric-lbl">🟢 Nồng Độ CO2</div>
-                <div class="metric-val">{curr['co2_ppm']} <span style="font-size:14px; color:#94A3B8;">ppm</span></div>
+                <div class="metric-val">{curr['co2_ppm']} <span style="font-size:14px; color:#E2E8F0;">ppm</span></div>
                 <div class="metric-sub" style="color: {delta_color};">{'▲' if diff_co2>0 else '▼'} {abs(diff_co2)} ppm</div>
             </div>
             """, unsafe_allow_html=True)
@@ -314,7 +324,7 @@ with main_place.container():
             st.markdown(f"""
             <div class="vip-metric-card">
                 <div class="metric-lbl">🌫️ Bụi Mịn PM2.5</div>
-                <div class="metric-val">{curr['pm25']} <span style="font-size:14px; color:#94A3B8;">µg/m³</span></div>
+                <div class="metric-val">{curr['pm25']} <span style="font-size:14px; color:#E2E8F0;">µg/m³</span></div>
                 <div class="metric-sub">⚡ Vi Cảm Biến Real-Time</div>
             </div>
             """, unsafe_allow_html=True)
@@ -324,12 +334,12 @@ with main_place.container():
             <div class="vip-metric-card">
                 <div class="metric-lbl">💧 Độ Ẩm Không Khí</div>
                 <div class="metric-val">{curr['humidity']} %</div>
-                <div class="metric-sub" style="color:#8B5CF6;">🌊 Ổn định môi trường</div>
+                <div class="metric-sub" style="color:#C084FC;">🌊 Ổn định môi trường</div>
             </div>
             """, unsafe_allow_html=True)
             
         with m5:
-            aqi_color = "#10B981" if curr['aqi'] < 50 else ("#F59E0B" if curr['aqi'] < 100 else "#EF4444")
+            aqi_color = "#10B981" if curr['aqi'] < 50 else ("#F59E0B" if curr['aqi'] < 100 else "#FF4D4D")
             st.markdown(f"""
             <div class="vip-metric-card">
                 <div class="metric-lbl">⚠️ Chỉ Số Chất Lượng AQI</div>
@@ -359,6 +369,10 @@ with main_place.container():
         "📋 Dữ Liệu & Xuất CSV"
     ])
 
+    # Plotly dark font standard styling
+    plotly_font_style = dict(family="Plus Jakarta Sans", color="#FFFFFF", size=13)
+    plotly_title_style = dict(family="Plus Jakarta Sans", color="#FFFFFF", size=16)
+
     # -------------------------------------------------------------------------
     # TAB 1: REAL-TIME STREAM & GAUGE METERS
     # -------------------------------------------------------------------------
@@ -378,7 +392,7 @@ with main_place.container():
                     name="Nồng độ CO2 (ppm)",
                     line=dict(color="#00F2FE", width=3.5, shape='spline'),
                     fill='tozeroy',
-                    fillcolor='rgba(0, 242, 254, 0.08)'
+                    fillcolor='rgba(0, 242, 254, 0.12)'
                 ))
                 
                 # PM2.5 Spline Line
@@ -387,7 +401,7 @@ with main_place.container():
                     y=st.session_state.stream_history["pm25"],
                     mode="lines+markers",
                     name="Bụi mịn PM2.5 (µg/m³)",
-                    line=dict(color="#F43F5E", width=2.5, dash='dash', shape='spline')
+                    line=dict(color="#FF007F", width=2.5, dash='dash', shape='spline')
                 ))
                 
                 # Anomalies
@@ -398,19 +412,20 @@ with main_place.container():
                         y=anoms["co2_ppm"],
                         mode="markers",
                         name="🔥 Anomaly Spike",
-                        marker=dict(color="#FF007F", size=14, symbol="diamond", line=dict(color="#FFFFFF", width=2))
+                        marker=dict(color="#FFD700", size=15, symbol="diamond", line=dict(color="#FFFFFF", width=2))
                     ))
                     
                 fig_st.update_layout(
-                    title=f"Luồng Dữ Liệu Thời Gian Thực (Cập nhật: {(datetime.now() + timedelta(hours=7)).strftime('%H:%M:%S')})",
-                    xaxis_title="Thời gian thực",
-                    yaxis_title="Giá trị Cảm biến",
+                    title=dict(text=f"Luồng Dữ Liệu Thời Gian Thực (Cập nhật: {(datetime.now() + timedelta(hours=7)).strftime('%H:%M:%S')})", font=plotly_title_style),
+                    xaxis=dict(title="Thời gian thực", title_font=plotly_font_style, tickfont=plotly_font_style, gridcolor="rgba(255,255,255,0.1)"),
+                    yaxis=dict(title="Giá trị Cảm biến", title_font=plotly_font_style, tickfont=plotly_font_style, gridcolor="rgba(255,255,255,0.1)"),
                     template="plotly_dark",
-                    paper_bgcolor="rgba(15, 23, 42, 0.6)",
-                    plot_bgcolor="rgba(15, 23, 42, 0.6)",
+                    paper_bgcolor="rgba(15, 23, 42, 0.8)",
+                    plot_bgcolor="rgba(15, 23, 42, 0.8)",
                     height=440,
+                    font=plotly_font_style,
                     hovermode="x unified",
-                    legend=dict(orientation="h", y=1.1, x=0.1)
+                    legend=dict(orientation="h", y=1.12, x=0.05, font=plotly_font_style)
                 )
                 st.plotly_chart(fig_st, use_container_width=True)
                 
@@ -422,17 +437,18 @@ with main_place.container():
                 fig_g = go.Figure(go.Indicator(
                     mode="gauge+number+delta",
                     value=latest_z,
-                    title={'text': "Độ Bất Thường (Z-Score σ)", 'font': {'size': 16, 'color': '#F8FAFC'}},
+                    title={'text': "Độ Bất Thường (Z-Score σ)", 'font': {'size': 16, 'color': '#FFFFFF'}},
+                    number={'font': {'color': '#FFFFFF', 'size': 40}},
                     gauge={
-                        'axis': {'range': [0, 4], 'tickwidth': 1, 'tickcolor': "#94A3B8"},
+                        'axis': {'range': [0, 4], 'tickwidth': 1, 'tickcolor': "#FFFFFF", 'tickfont': {'color': '#FFFFFF'}},
                         'bar': {'color': "#FF007F" if latest_z > z_threshold else "#00F2FE"},
                         'steps': [
-                            {'range': [0, 1.5], 'color': "rgba(16, 185, 129, 0.2)"},
-                            {'range': [1.5, 2.5], 'color': "rgba(245, 158, 11, 0.2)"},
-                            {'range': [2.5, 4.0], 'color': "rgba(239, 68, 68, 0.3)"}
+                            {'range': [0, 1.5], 'color': "rgba(16, 185, 129, 0.3)"},
+                            {'range': [1.5, 2.5], 'color': "rgba(245, 158, 11, 0.3)"},
+                            {'range': [2.5, 4.0], 'color': "rgba(239, 68, 68, 0.4)"}
                         ],
                         'threshold': {
-                            'line': {'color': "#EF4444", 'width': 4},
+                            'line': {'color': "#FF3B30", 'width': 4},
                             'thickness': 0.75,
                             'value': z_threshold
                         }
@@ -440,9 +456,10 @@ with main_place.container():
                 ))
                 fig_g.update_layout(
                     template="plotly_dark",
-                    paper_bgcolor="rgba(15, 23, 42, 0.6)",
-                    plot_bgcolor="rgba(15, 23, 42, 0.6)",
+                    paper_bgcolor="rgba(15, 23, 42, 0.8)",
+                    plot_bgcolor="rgba(15, 23, 42, 0.8)",
                     height=440, 
+                    font=plotly_font_style,
                     margin=dict(l=20, r=20, t=60, b=20)
                 )
                 st.plotly_chart(fig_g, use_container_width=True)
@@ -475,15 +492,17 @@ with main_place.container():
                 )
                 fig_4d.update_layout(
                     template="plotly_dark",
-                    paper_bgcolor="rgba(15, 23, 42, 0.6)",
-                    plot_bgcolor="rgba(15, 23, 42, 0.6)",
-                    height=480
+                    paper_bgcolor="rgba(15, 23, 42, 0.8)",
+                    plot_bgcolor="rgba(15, 23, 42, 0.8)",
+                    font=plotly_font_style,
+                    height=480,
+                    xaxis=dict(title_font=plotly_font_style, tickfont=plotly_font_style),
+                    yaxis=dict(title_font=plotly_font_style, tickfont=plotly_font_style)
                 )
                 st.plotly_chart(fig_4d, use_container_width=True)
                 
         with c3d:
             st.markdown("##### 🧊 2. Biểu Đồ Bề Mặt Rủi Ro Môi Trường 3D (Environmental 3D Surface)")
-            # Tạo lưới 3D mô phỏng mô hình rủi ro
             x_gdp = np.linspace(10, 100, 30)
             y_energy = np.linspace(50, 500, 30)
             X_m, Y_m = np.meshgrid(x_gdp, y_energy)
@@ -492,20 +511,18 @@ with main_place.container():
             fig_3d = go.Figure(data=[go.Surface(
                 z=Z_risk, x=X_m, y=Y_m,
                 colorscale='Viridis',
-                colorbar=dict(title="Chỉ số Risk")
+                colorbar=dict(title=dict(text="Chỉ số Risk", font=plotly_font_style), tickfont=plotly_font_style)
             )])
             fig_3d.update_layout(
-                title="Bề mặt 3D: Tương quan GDP x Năng lượng x Chỉ số Rủi ro Môi trường",
+                title=dict(text="Bề mặt 3D: Tương quan GDP x Năng lượng x Chỉ số Rủi ro Môi trường", font=plotly_title_style),
                 scene=dict(
-                    xaxis_title='Quy mô GDP',
-                    yaxis_title='Tiêu thụ Năng lượng',
-                    zaxis_title='Chỉ số Rủi ro',
-                    xaxis=dict(backgroundcolor="rgba(15, 23, 42, 0.6)"),
-                    yaxis=dict(backgroundcolor="rgba(15, 23, 42, 0.6)"),
-                    zaxis=dict(backgroundcolor="rgba(15, 23, 42, 0.6)")
+                    xaxis=dict(title='Quy mô GDP', titlefont=plotly_font_style, tickfont=plotly_font_style, backgroundcolor="rgba(15, 23, 42, 0.8)"),
+                    yaxis=dict(title='Tiêu thụ Năng lượng', titlefont=plotly_font_style, tickfont=plotly_font_style, backgroundcolor="rgba(15, 23, 42, 0.8)"),
+                    zaxis=dict(title='Chỉ số Rủi ro', titlefont=plotly_font_style, tickfont=plotly_font_style, backgroundcolor="rgba(15, 23, 42, 0.8)")
                 ),
                 template="plotly_dark",
-                paper_bgcolor="rgba(15, 23, 42, 0.6)",
+                paper_bgcolor="rgba(15, 23, 42, 0.8)",
+                font=plotly_font_style,
                 height=480,
                 margin=dict(l=10, r=10, t=50, b=10)
             )
@@ -531,8 +548,9 @@ with main_place.container():
             )
             fig_map.update_layout(
                 template="plotly_dark",
-                paper_bgcolor="rgba(15, 23, 42, 0.6)",
-                geo=dict(bgcolor="rgba(15, 23, 42, 0.6)", showcoastlines=True, coastlinecolor="#334155"),
+                paper_bgcolor="rgba(15, 23, 42, 0.8)",
+                geo=dict(bgcolor="rgba(15, 23, 42, 0.8)", showcoastlines=True, coastlinecolor="#64748B"),
+                font=plotly_font_style,
                 height=460,
                 margin=dict(l=0, r=0, t=40, b=0)
             )
@@ -547,7 +565,6 @@ with main_place.container():
                 'share_global_co2', 'primary_energy_consumption', 'renewables_energy_per_capita',
                 'cement_co2', 'flaring_co2'
             ]
-            # Lấy các cột tồn tại trong DataFrame
             valid_cols = [c for c in cols16 if c in df_owid.columns]
             df_corr_data = df_owid[df_owid['year'] >= 2015][valid_cols].dropna()
             
@@ -563,9 +580,12 @@ with main_place.container():
                 )
                 fig_hm.update_layout(
                     template="plotly_dark",
-                    paper_bgcolor="rgba(15, 23, 42, 0.6)",
-                    plot_bgcolor="rgba(15, 23, 42, 0.6)",
-                    height=580
+                    paper_bgcolor="rgba(15, 23, 42, 0.8)",
+                    plot_bgcolor="rgba(15, 23, 42, 0.8)",
+                    font=plotly_font_style,
+                    height=580,
+                    xaxis=dict(tickfont=plotly_font_style),
+                    yaxis=dict(tickfont=plotly_font_style)
                 )
                 st.plotly_chart(fig_hm, use_container_width=True)
 
@@ -587,12 +607,12 @@ with main_place.container():
             co2_flaring = df_vn['flaring_co2'].fillna(0).tolist()
             
             fig_cb = go.Figure()
-            fig_cb.add_trace(go.Scatter(x=years, y=co2_coal, mode='lines+markers', name='1. 🔥 CO2 Than đá', line=dict(color='#EF4444', width=3)))
+            fig_cb.add_trace(go.Scatter(x=years, y=co2_coal, mode='lines+markers', name='1. 🔥 CO2 Than đá', line=dict(color='#FF4D4D', width=3)))
             fig_cb.add_trace(go.Scatter(x=years, y=co2_oil, mode='lines+markers', name='2. 🛢️ CO2 Dầu mỏ', line=dict(color='#F59E0B', width=3)))
             fig_cb.add_trace(go.Scatter(x=years, y=co2_gas, mode='lines+markers', name='3. 💨 CO2 Khí đốt', line=dict(color='#38BDF8', width=3)))
             fig_cb.add_trace(go.Scatter(x=years, y=co2_methane, mode='lines+markers', name='4. 🌾 Khí Methane', line=dict(color='#10B981', width=3)))
-            fig_cb.add_trace(go.Scatter(x=years, y=co2_cement, mode='lines+markers', name='5. 🏭 CO2 Xi măng', line=dict(color='#A855F7', width=3)))
-            fig_cb.add_trace(go.Scatter(x=years, y=co2_flaring, mode='lines+markers', name='6. 💥 CO2 Flaring', line=dict(color='#EC4899', width=3)))
+            fig_cb.add_trace(go.Scatter(x=years, y=co2_cement, mode='lines+markers', name='5. 🏭 CO2 Xi măng', line=dict(color='#C084FC', width=3)))
+            fig_cb.add_trace(go.Scatter(x=years, y=co2_flaring, mode='lines+markers', name='6. 💥 CO2 Flaring', line=dict(color='#FF007F', width=3)))
             fig_cb.add_trace(go.Scatter(x=years, y=co2_total, mode='lines+markers', name='7. 🔴 Tổng CO2 Quôc Gia', line=dict(color='#00F2FE', width=4, dash='dash')))
             
             btn_list = [
@@ -607,9 +627,12 @@ with main_place.container():
             
             fig_cb.update_layout(
                 template="plotly_dark",
-                paper_bgcolor="rgba(15, 23, 42, 0.6)",
-                plot_bgcolor="rgba(15, 23, 42, 0.6)",
+                paper_bgcolor="rgba(15, 23, 42, 0.8)",
+                plot_bgcolor="rgba(15, 23, 42, 0.8)",
+                font=plotly_font_style,
                 height=520,
+                xaxis=dict(title="Năm", title_font=plotly_font_style, tickfont=plotly_font_style),
+                yaxis=dict(title="Lượng Khí Thải (Triệu Tấn)", title_font=plotly_font_style, tickfont=plotly_font_style),
                 updatemenus=[dict(
                     type="buttons",
                     direction="right",
@@ -618,8 +641,8 @@ with main_place.container():
                     y=1.22,
                     xanchor="center",
                     bgcolor="#1E293B",
-                    bordercolor="#334155",
-                    font=dict(color="#F8FAFC", size=12),
+                    bordercolor="#475569",
+                    font=dict(color="#FFFFFF", size=13, family="Plus Jakarta Sans"),
                     buttons=btn_list
                 )]
             )
@@ -701,10 +724,11 @@ with main_place.container():
                     height=360,
                     showlegend=False,
                     template="plotly_dark",
-                    paper_bgcolor="rgba(15, 23, 42, 0.6)",
-                    plot_bgcolor="rgba(15, 23, 42, 0.6)",
-                    xaxis_title="Độ quan trọng",
-                    yaxis_title="Đặc trưng"
+                    paper_bgcolor="rgba(15, 23, 42, 0.8)",
+                    plot_bgcolor="rgba(15, 23, 42, 0.8)",
+                    font=plotly_font_style,
+                    xaxis=dict(title="Độ quan trọng", title_font=plotly_font_style, tickfont=plotly_font_style),
+                    yaxis=dict(title="Đặc trưng", title_font=plotly_font_style, tickfont=plotly_font_style)
                 )
                 st.plotly_chart(fig_imp, use_container_width=True)
 
